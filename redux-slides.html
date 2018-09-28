@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Awesome Presentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .flexcenter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .largeText {
+        font-size: 20px;
+      }
+
+      .smallText {
+        font-size: 14px;
+      }
+      
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, largeText
+
+# Redux
+
+Redux is a predictable state container.
+
+---
+class: largeText
+# State Predictability
+----
+
+## In JQuery - Whole App
+## In React - Hierarchical
+## In Redux - Store
+
+---
+class: largeText
+# JQuery (Whole App)
+----
+<img src="./images/shrug.png"  height="100">
+
+## Where Does State Live?
+- Anywhere
+
+## Where Is State Modified?
+- Anywhere
+
+## When Did State Change?
+- Hard To Know
+
+---
+class: largeText
+# React (Hierarchical)
+----
+<img src="./images/hierarchy.png" height="100">
+
+## Where Does State Live?
+- Mostly Component or Parent
+
+## Where Is State Modified?
+- Mostly Component or Children
+
+## When Did State Change?
+- Debug function that changes state
+
+---
+class: largeText
+# Redux (Store)
+----
+<img src="./images/store.png" height="100">
+
+## Where Does State Live?
+- Store
+
+## Where Is State Modified?
+- Reducer
+
+## When Did State Change?
+- See actions live
+
+
+
+---
+
+# Introduction
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
