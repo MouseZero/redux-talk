@@ -40,10 +40,25 @@ class: center, middle, largeText
 # Redux
 
 predictable state container
+---
+class: largeText
+# Talk
+----
+
+## Compare State Predictability
+## Pros and Cons
+## Three Principles
+## Getting Started
+## When To Use Redux
+
+---
+class: largeText, center, middle
+# Compare State Predictability
+----
 
 ---
 class: largeText
-# State Predictability
+# Compare State Predictability
 ----
 
 ## In JQuery - Whole App
@@ -96,6 +111,11 @@ class: largeText
 - See actions live
 
 ---
+class: largeText, center, middle
+# Pros and Cons
+----
+
+---
 class: largeText
 # Redux Pros 😊
 ----
@@ -118,16 +138,128 @@ class: largeText
 ## Time
 
 ---
-class: largeText
-# How does Redux work? 
+class: largeText, center, middle
+# Three Principles
 ----
 
-<img src="./images/puzzle.png" height="100">
+---
+class: largeText
+# Three Principles 
+----
 
-## Three Main Parts
-### Store
-### Actions
-### Reducers
+<table style="width: 100%">
+  <tr>
+    <td style="width: 25%"></td>
+    <td style="width: 50%">
+      <img src="./images/redux-flow.png">
+    </td>
+    <td style="width: 25%"></td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Store
+----
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%">
+      <h2>Holds applications state</h2>
+      <h2>Immutable but replaceable</h2>
+      <h2>Triggers changes in the view</h2>
+    </td>
+    <td style="width: 50%">
+      <img src="./images/store-flow.png">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Reducers
+----
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%">
+      <h2>Use Pure Functions</h2>
+      <h2>Takes In An Action</h2>
+      <h2>Replace State (immutable)</h2>
+      <h2>Only Place That Changes The Store</h2>
+    </td>
+    <td style="width: 50%">
+      <img src="./images/reducers-flow.png">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Actions
+----
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%">
+      <h2>Just an Object</h2>
+      <h2>Represents state change</h2>
+    </td>
+    <td style="width: 50%">
+      <img src="./images/actions-flow.png">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Dispatch
+----
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%">
+      <h2>Passes Action to Reducer</h2>
+      <h2>Called by a View</h2>
+      <h2>Called From Async Function</h2>
+    </td>
+    <td style="width: 50%">
+      <img src="./images/dispatch-flow.png">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText, center, middle
+# Getting Started
+----
+
+
+---
+class: largeText
+# Tools
+----
+
+## Integrate Redux with React
+Install "react-redux"
+```bash
+npm install --save react-redux
+```
+
+---
+class: largeText
+# 
+----
+
+
+
+
+
+
+
+
+
+
 
 
 
