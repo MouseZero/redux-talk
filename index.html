@@ -48,8 +48,10 @@ class: largeText
 ## Compare State Predictability
 ## Pros and Cons
 ## Three Principles
-## Getting Started
-## When To Use Redux
+## Plane Redux App
+## React/Redux App
+## Async
+## Consider Redux When
 
 ---
 class: largeText, center, middle
@@ -231,34 +233,288 @@ class: largeText
 
 ---
 class: largeText, center, middle
-# Getting Started
+# Plane Redux App
 ----
-
 
 ---
 class: largeText
-# Tools
+# Action
 ----
-
-## Integrate Redux with React
-Install "react-redux"
-```bash
-npm install --save react-redux
+```javascript
+const action = {type: 'INCREMENT', add: 5}
 ```
 
 ---
 class: largeText
-# 
+# Reducer
+----
+```javascript
+function reducer(state, action) {
+  switch(action.type) {
+    case 'INCREMENT':
+      return Object.assign({}, state, {
+        number: (state.number + action.add)
+      })
+    default:
+      return state
+  }
+}
+```
+
+---
+class: largeText
+# Store
+----
+```javascript
+const { createStore } = require('redux')
+const store = createStore(reducer, {number: 0})
+```
+
+---
+class: largeText
+# Listen
+----
+```javascript
+function listener () {
+  console.log('checking state', store.getState())
+}
+store.subscribe(listener)
+```
+
+---
+class: largeText
+# Dispatch
+----
+```javascript
+store.dispatch(action)
+store.dispatch(action)
+```
+
+---
+# Full Redux
+----
+```javascript
+const { createStore } = require('redux')
+
+// Action //
+action = {type: 'INCREMENT', add: 5}
+
+// Reducer //
+function reducer(state, action) {
+  switch(action.type) {
+    case 'INCREMENT':
+      return Object.assign({}, state, {
+        number: (state.number + action.add)
+      })
+    default:
+      return state
+  }
+}
+
+// Store //
+const store = createStore(reducer, {number: 0})
+
+// Listener //
+function listener () {
+  console.log('checking state', store.getState())
+}
+store.subscribe(listener)
+
+// Dispatch //
+store.dispatch(action)
+store.dispatch(action)
+```
+
+---
+class: largeText, center, middle
+# React/Redux App
 ----
 
+## Package "react-redux"
+## Index.js
+## Reducer.js
+## Component.js
+
+---
+class: largeText
+# Package "react-redux"
+----
+## Install "react-redux"
+```bash
+npm install --save react-redux
+```
+
+## API
+### createProvider = Create a Provider for component state access
+### connect = Hook up component to state
+
+---
+class: largeText
+# Index.js
+----
+
+## Imports
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {createProvider} from 'react-redux'
+import { createStore } from 'redux'
+
+import Component from './Component'
+import reducer from './Reducer'
+```
+
+---
+class: largeText
+# Index.js
+----
+
+## Provider And Store
+```javascript
+const Provider = createProvider()
+const store = createStore(reducer, {count: 0})
+```
+
+---
+class: largeText
+# Index.js
+----
+
+## Render App
+```
+ReactDOM.render(
+  (<Provider store={store}>
+    <Component/>
+  </Provider>),
+  window.document.getElementById('app')
+)
+```
+
+---
+class: largeText
+# Index.js
+----
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {createProvider} from 'react-redux'
+import { createStore } from 'redux'
+
+import Component from './Component'
+import reducer from './Reducer'
+
+const Provider = createProvider()
+const store = createStore(reducer, {count: 0})
 
 
+ReactDOM.render(
+  (<Provider store={store}>
+    <Component/>
+  </Provider>),
+  window.document.getElementById('app')
+)
+```
 
+---
+class: largeText
+# Reducer.js
+----
 
+```javascript
+export default function reducer(state, action) {
+  switch(action.type) {
+    case 'INCREMENT':
+      return Object.assign({}, state, {
+        count: state.count + 1
+      })
+    case 'DECREMENT':
+      return Object.assign({}, state, {
+        count: state.count - 1
+      })
+    default:
+      return state
+  }
+}
+```
 
+---
+class: largeText
+# Component.js
+----
 
+## Normal Component Parts
+```javascript
+import React from 'react'
+import {connect} from 'react-redux'
 
+function Component({count, increment, decrement}) {
+  return (
+    <div>
+      <button onClick={decrement}>-</button>
+      Count {count}
+      <button onClick={increment}>+</button>
+    </div>
+  )
+}
+```
 
+---
+class: largeText
+# Component.js
+----
+
+## React/Redux Parts
+
+```javascript
+const mapStateToProps = (state) => ({
+  count: state.count
+})
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({type: 'INCREMENT'}),
+  decrement: () => dispatch({type: 'DECREMENT'})
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Component)
+```
+
+---
+class: largeText
+# Component.js
+----
+
+```
+import React from 'react'
+import {connect} from 'react-redux'
+
+function Component({count, increment, decrement}) {
+  return (
+    <div>
+      <button onClick={decrement}>-</button>
+      Count {count}
+      <button onClick={increment}>+</button>
+    </div>
+  )
+}
+
+const mapStateToProps = (state) => ({
+  count: state.count
+})
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({type: 'INCREMENT'}),
+  decrement: () => dispatch({type: 'DECREMENT'})
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Component)
+```
+
+---
+class: largeText
+# Consider Redux When
+----
+
+## Need "Context" API in React
+## State changes for many reasons
+## Many components share state
 
 
 
