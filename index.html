@@ -46,6 +46,7 @@ class: largeText
 ----
 
 ## Compare State Predictability
+## Browser Plugin
 ## Pros and Cons
 ## Three Principles
 ## Plane Redux App
@@ -384,9 +385,9 @@ class: largeText
 ## Render App
 ```
 ReactDOM.render(
-  (<Provider store={store}>
+  <Provider store={store}>
     <Component/>
-  </Provider>),
+  </Provider>,
   window.document.getElementById('app')
 )
 ```
@@ -396,7 +397,7 @@ class: largeText
 # Index.js
 ----
 
-```javascript
+```
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createProvider} from 'react-redux'
@@ -410,9 +411,9 @@ const store = createStore(reducer, {count: 0})
 
 
 ReactDOM.render(
-  (<Provider store={store}>
+  <Provider store={store}>
     <Component/>
-  </Provider>),
+  </Provider>,
   window.document.getElementById('app')
 )
 ```
@@ -445,7 +446,7 @@ class: largeText
 ----
 
 ## Normal Component Parts
-```javascript
+```
 import React from 'react'
 import {connect} from 'react-redux'
 
@@ -505,6 +506,59 @@ const mapDispatchToProps = (dispatch) => ({
   decrement: () => dispatch({type: 'DECREMENT'})
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Component)
+```
+
+---
+class: largeText
+# Async
+----
+
+## redux-thunk
+## redux-saga
+
+
+---
+class: largeText
+# redux-thunk
+----
+
+Without redux-thunk you `dispatch` an object
+```javascript
+dispatch({ type: 'ADD', number: 3 })
+```
+
+With redux-thunk you `dispatch` a function
+```javascript
+dispatch((_dispatch) => {
+  _dispatch({ type: 'ADD', number: 3 })
+})
+```
+
+---
+class: largeText
+# redux-thunk
+----
+
+A function is useful for using async operations
+
+Example 1
+```javascript
+function add3Delayed (dispatch) {
+  setTimeout(
+    () => dispatch({ type: 'ADD', number: 3 }),
+    3000
+  )
+}
+```
+
+Example 2
+```javascript
+function getTodoItem (dispatch) {
+  fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(json => Object.assign({}, json, { type: 'ADD_TODO' }))
+    .then(action => dispatch(action))
+}
 ```
 
 ---
