@@ -35,6 +35,15 @@
   <body>
     <textarea id="source">
 
+
+
+
+
+
+
+
+
+
 class: center, middle, largeText
 
 # Redux
@@ -45,23 +54,55 @@ class: largeText
 # Talk
 ----
 
-## Compare State Predictability
-## Browser Plugin
 ## Pros and Cons
-## Three Principles
-## Plane Redux App
-## React/Redux App
-## Async
+## Creating Apps
 ## Consider Redux When
+
+
+
+
+
+
+
+
+
 
 ---
 class: largeText, center, middle
-# Compare State Predictability
+# Pros and Cons
 ----
 
 ---
 class: largeText
-# Compare State Predictability
+# Redux Pros 😊
+----
+
+## Transparent state
+## Track changes (DOM +)
+## Import state
+## Removes nested prop passing
+## Shared state is less complex
+## Time Travel
+
+---
+class: largeText
+# Redux Cons 😭
+----
+
+## Complexity
+## Boiler plate
+## Team learning
+## Time
+
+---
+class: largeText, center, middle
+# Pros and Cons
+----
+## State Predictability Compairison
+
+---
+class: largeText
+# State Predictability Compairison
 ----
 
 ## In JQuery - Whole App
@@ -114,13 +155,49 @@ class: largeText
 - See actions live
 
 ---
-class: largeText middle center
-# Browser Plugins
+class: largeText, center, middle
+# Pros and Cons
 ----
+## Browser Plugin
+
+---
+class: largeText
+# React vs Redux Plugin
+----
+## Redux
+
+- Find State
+
+## React
+
+- Find State
+- See Actions
+- Time Travel
+- Load State
+
 
 ---
 class: largeText
 # React Plugin
+----
+
+<table style="width: 100%;">
+  <tr>
+    <td>
+      <h2>Finding State and Props</h2>
+      <h3>Difficult to navigate</h3>
+      <h3>Check all Parents</h3>
+      <h3>Better then JQuery</h3>
+    </td>
+    <td style="text-align: right">
+      <img src="./images/react-plugin.png" height="500">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Redux Plugin
 ----
 
 <table style="width: 100%;">
@@ -137,37 +214,32 @@ class: largeText
   </tr>
 </table>
 
----
-class: largeText, center, middle
-# Pros and Cons
-----
 
----
-class: largeText
-# Redux Pros 😊
-----
 
-## Transparent state
-## Track changes (DOM +)
-## Import state
-## Removes nested prop passing
-## Shared state is less complex
-## Time Travel
 
----
-class: largeText
-# Redux Cons 😭
-----
 
-## Complexity
-## Boiler plate
-## Team learning
-## Time
+
+
 
 ---
 class: largeText, center, middle
-# Three Principles
+# Creating Apps
 ----
+
+---
+class: largeText, center, middle
+# Creating Apps
+----
+## Three Principles
+## Plane Redux App
+## React/Redux App
+## Async
+
+---
+class: largeText, center, middle
+# Creating Apps
+----
+## Three Principles
 
 ---
 class: largeText
@@ -258,8 +330,9 @@ class: largeText
 
 ---
 class: largeText, center, middle
-# Plane Redux App
+# Creating Apps
 ----
+## Plane Redux App
 
 ---
 class: largeText
@@ -349,6 +422,12 @@ store.subscribe(listener)
 store.dispatch(action)
 store.dispatch(action)
 ```
+
+---
+class: largeText, center, middle
+# Creating Apps
+----
+## React/Redux App
 
 ---
 class: largeText, center, middle
@@ -533,13 +612,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(Component)
 ```
 
 ---
+class: largeText, center, middle
+# Creating Apps
+----
+## Async
+
+---
 class: largeText
 # Async
 ----
 
 ## redux-thunk
 ## redux-saga
-
 
 ---
 class: largeText
@@ -584,6 +668,15 @@ function getTodoItem (dispatch) {
     .then(action => dispatch(action))
 }
 ```
+
+
+
+
+
+
+
+
+
 
 ---
 class: largeText
