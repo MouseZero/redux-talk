@@ -54,166 +54,9 @@ class: largeText
 # Talk
 ----
 
-## Pros and Cons
 ## Creating Apps
-## Consider Redux When
-
-
-
-
-
-
-
-
-
-
----
-class: largeText, center, middle
-# Pros and Cons
-----
-
----
-class: largeText
-# Redux Pros 😊
-----
-
-## Transparent state
-## Track changes (DOM +)
-## Import state
-## Removes nested prop passing
-## Shared state is less complex
-## Time Travel
-
----
-class: largeText
-# Redux Cons 😭
-----
-
-## Complexity
-## Boiler plate
-## Team learning
-## Time
-
----
-class: largeText, center, middle
-# Pros and Cons
-----
-## State Predictability Compairison
-
----
-class: largeText
-# State Predictability Compairison
-----
-
-## In JQuery - Whole App
-## In React - Hierarchical
-## In Redux - Store
-
----
-class: largeText
-# JQuery (Whole App)
-----
-<img src="./images/shrug.png"  height="100">
-
-## Where Does State Live?
-- Anywhere
-
-## Where Is State Modified?
-- Anywhere
-
-## When Did State Change?
-- Hard To Know
-
----
-class: largeText
-# React (Hierarchical)
-----
-<img src="./images/hierarchy.png" height="100">
-
-## Where Does State Live?
-- Mostly Component or Parent
-
-## Where Is State Modified?
-- Mostly Component or Children
-
-## When Did State Change?
-- Debug function that changes state
-
----
-class: largeText
-# Redux (Store)
-----
-<img src="./images/store.png" height="100">
-
-## Where Does State Live?
-- Store
-
-## Where Is State Modified?
-- Reducer
-
-## When Did State Change?
-- See actions live
-
----
-class: largeText, center, middle
-# Pros and Cons
-----
-## Browser Plugin
-
----
-class: largeText
-# React vs Redux Plugin
-----
-## Redux
-
-- Find State
-
-## React
-
-- Find State
-- See Actions
-- Time Travel
-- Load State
-
-
----
-class: largeText
-# React Plugin
-----
-
-<table style="width: 100%;">
-  <tr>
-    <td>
-      <h2>Finding State and Props</h2>
-      <h3>Difficult to navigate</h3>
-      <h3>Check all Parents</h3>
-      <h3>Better then JQuery</h3>
-    </td>
-    <td style="text-align: right">
-      <img src="./images/react-plugin.png" height="500">
-    </td>
-  </tr>
-</table>
-
----
-class: largeText
-# Redux Plugin
-----
-
-<table style="width: 100%;">
-  <tr>
-    <td>
-      <h2>Finding State</h2>
-      <h3>Difficult to navigate</h3>
-      <h3>Check all Parents</h3>
-      <h3>Better then JQuery</h3>
-    </td>
-    <td style="text-align: right">
-      <img src="./images/react-plugin.png" height="500">
-    </td>
-  </tr>
-</table>
-
+## Pros and Cons
+## Conclusion
 
 
 
@@ -276,6 +119,23 @@ class: largeText
 
 ---
 class: largeText
+# Actions
+----
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%">
+      <h2>Just an Object</h2>
+      <h2>Represents state change</h2>
+    </td>
+    <td style="width: 50%">
+      <img src="./images/actions-flow.png">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
 # Reducers
 ----
 
@@ -289,23 +149,6 @@ class: largeText
     </td>
     <td style="width: 50%">
       <img src="./images/reducers-flow.png">
-    </td>
-  </tr>
-</table>
-
----
-class: largeText
-# Actions
-----
-
-<table style="width: 100%">
-  <tr>
-    <td style="width: 50%">
-      <h2>Just an Object</h2>
-      <h2>Represents state change</h2>
-    </td>
-    <td style="width: 50%">
-      <img src="./images/actions-flow.png">
     </td>
   </tr>
 </table>
@@ -344,7 +187,48 @@ const action = {type: 'INCREMENT', add: 5}
 
 ---
 class: largeText
-# Reducer
+# Simplest Reducer
+----
+
+## Inputs
+- Entire redux state
+- Action to preform
+
+## Output
+- New entire store
+
+```javascript
+function reducer (state, action) {
+  return newState
+}
+```
+
+---
+class: largeText
+# Naive Reducer
+----
+
+``` javascript
+function reducer (state, action) {
+  return {
+    count: state.count + action.add
+  }
+}
+```
+
+## Problems
+- Store only has "count" and will not work with a store like this
+```javascript
+{
+  &nbsp;&nbsp;count: 5,
+  &nbsp;&nbsp;userName: 'Ashley'
+}
+```
+- Expects a single action
+
+---
+class: largeText
+# Typical Reducer
 ----
 ```javascript
 function reducer(state, action) {
@@ -482,11 +366,20 @@ const store = createStore(reducer, {count: 0})
 
 ---
 class: largeText
+# Wrap Components In Provider
+```jsx
+<Provider store={store}>
+  <Component/>
+</Provider>,
+```
+
+---
+class: largeText
 # Index.js
 ----
 
 ## Render App
-```
+```jsx
 ReactDOM.render(
   <Provider store={store}>
     <Component/>
@@ -500,7 +393,7 @@ class: largeText
 # Index.js
 ----
 
-```
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createProvider} from 'react-redux'
@@ -549,9 +442,8 @@ class: largeText
 ----
 
 ## Normal Component Parts
-```
+```jsx
 import React from 'react'
-import {connect} from 'react-redux'
 
 function Component({count, increment, decrement}) {
   return (
@@ -566,12 +458,67 @@ function Component({count, increment, decrement}) {
 
 ---
 class: largeText
+# Inject Redux Into Component
+
+## Normal Export
+```javascript
+export default Component
+```
+
+## Redux Injection
+```javascript
+export default connect(mapStateToProps, mapDispatchToProps)(Component)
+```
+
+## Why
+- State as props
+- State changes as props
+
+---
+class: largeText
+# mapStateToProps
+----
+
+## Input
+- All of redux state
+
+## Output
+- Object with props to inject
+
+```javascript
+const mapStateToProps = (state) => ({
+  count: state.count
+})
+```
+
+---
+class: largeText
+# mapDispatchToProps
+----
+
+## Input
+- Dispatch function
+
+## Output
+- Object with props to inject
+
+```javascript
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({type: 'INCREMENT'}),
+  decrement: () => dispatch({type: 'DECREMENT'})
+})
+```
+
+---
+class: largeText
 # Component.js
 ----
 
 ## React/Redux Parts
 
 ```javascript
+import {connect} from 'react-redux'
+
 const mapStateToProps = (state) => ({
   count: state.count
 })
@@ -587,7 +534,7 @@ class: largeText
 # Component.js
 ----
 
-```
+```jsx
 import React from 'react'
 import {connect} from 'react-redux'
 
@@ -637,9 +584,11 @@ dispatch({ type: 'ADD', number: 3 })
 
 With redux-thunk you `dispatch` a function
 ```javascript
-dispatch((_dispatch) => {
-  _dispatch({ type: 'ADD', number: 3 })
-})
+fuction thunk (dispatch) {
+  dispatch({ type: 'ADD', number: 3 })
+}
+
+dispatch(thunk)
 ```
 
 ---
@@ -677,10 +626,209 @@ function getTodoItem (dispatch) {
 
 
 
+---
+class: largeText, center, middle
+# Pros and Cons
+----
 
 ---
 class: largeText
-# Consider Redux When
+# Redux Pros 😊
+----
+
+## Transparent state
+## Track changes (DOM +)
+## State snapshoting
+## Removes prop drilling
+## Shared state is less complex
+## Time Travel
+
+---
+class: largeText
+# Redux Cons 😭
+----
+
+## Complexity
+## Boiler plate
+## Team learning
+## Time
+
+---
+class: largeText, center, middle
+# Pros and Cons
+----
+## State Predictability Compairison
+
+---
+class: largeText
+# State Predictability Compairison
+----
+
+## In JQuery - Whole App
+## In React - Hierarchical
+## In Redux - Store
+
+---
+class: largeText
+# JQuery (Whole App)
+----
+<img src="./images/shrug.png"  height="100">
+
+## Where Does State Live?
+- Anywhere
+
+## Where Is State Modified?
+- Anywhere
+
+## When Did State Change?
+- Hard To Know
+
+---
+class: largeText
+# React (Hierarchical)
+----
+<img src="./images/hierarchy.png" height="100">
+
+## Where Does State Live?
+- Mostly Component or Parent
+
+## Where Is State Modified?
+- Mostly Component or Children
+
+## When Did State Change?
+- Debug function that changes state
+
+---
+class: largeText
+# Redux (Store)
+----
+<img src="./images/store.png" height="100">
+
+## Where Does State Live?
+- Store
+
+## Where Is State Modified?
+- One Reducer
+
+## When Did State Change?
+- See actions live
+
+---
+class: largeText, center, middle
+# Pros and Cons
+----
+## Browser Plugin
+
+---
+class: largeText
+# React vs Redux Plugin
+----
+## React
+
+- Find State
+
+## Redux
+
+- Find State
+- See Actions
+- Time Travel
+- Load State
+
+
+---
+class: largeText
+# React Plugin
+----
+
+<table style="width: 100%;">
+  <tr>
+    <td>
+      <h2>Finding State</h2>
+      <ul>
+        <li>Difficult to navigate</li>
+        <li>Check all Parenets</li>
+        <li>Better then JQuery</li>
+      </ul>
+    </td>
+    <td style="text-align: right; width: 500px">
+      <img src="./images/react-plugin.png" width="500">
+    </td>
+  </tr>
+</table>
+
+---
+class: largeText
+# Redux Plugin 
+----
+
+<table style="width: 100%;">
+  <tr>
+    <td>
+      <h2>Finding State</h2>
+      <ul>
+        <li>Easy</li>
+      </ul>
+      <h2>See Actions</h2>
+      <ul>
+        <li>Live</li>
+      </ul>
+      <h2>Time Travel</h2>
+      <h2>Load State</h2>
+    </td>
+    <td style="text-align: right; width: 500px;">
+      <img src="./images/state.png" width="500">
+      <div style="margin-bottom: 0.5rem;"></div>
+      <img src="./images/action.png" width="500">
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+---
+class: largeText, center, middle
+# Conclusion
+----
+
+---
+class: largeText, center, middle
+# Conclusion
+----
+
+## Warnings
+## Patterns
+## Consider Redux When?
+
+---
+class: largeText
+# Warnings
+----
+
+## Mixing React state and Redux state can
+  - Midigate benifits of state predicability
+
+---
+class: largeText
+# Patterns
+----
+## State
+- All state in Redux
+- Only global state in redux
+- All but component specific state in redux
+
+## --- Be Consistent ---
+
+---
+class: largeText
+# Consider Redux When?
 ----
 
 ## Need "Context" API in React
@@ -693,8 +841,22 @@ class: largeText
     </textarea>
     <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript">
     </script>
-    <script type="text/javascript">
-      var slideshow = remark.create();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-bash.min.js"></script>
+    <script>
+      remark.highlighter.engine.highlightBlock = block => {
+        const [ language ] = block.className.split(' ')
+        const prismLang = Prism.languages[language]
+        if (prismLang) {
+          block.parentNode.className = `${block.parentNode.className} language-${language} rounded p-4`
+          block.innerHTML = Prism.highlight(block.textContent, prismLang)
+        } else {
+          console.warn(`Language '${language}' not supported?`)
+        }
+      }
+      remark.create()
     </script>
   </body>
 </html>
